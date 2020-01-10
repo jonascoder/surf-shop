@@ -3,47 +3,57 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    res.render('index', { title: 'Surf Shop - Home' });
+  res.render('index', { title: 'Surf Shop - Home' });
 });
+
 /* GET /register */
 router.get('/register', (req, res, next) => {
-    res.render('GET /register');
+  res.send('GET /register');
 });
-/* Post /register */
+
+/* POST /register */
 router.post('/register', (req, res, next) => {
-    res.render('POST /register');
+  res.send('POST /register');
 });
+
 /* GET /login */
 router.get('/login', (req, res, next) => {
-    res.render('GET /login');
+  res.send('GET /login');
 });
-/* Post /login */
+
+/* POST /login */
 router.post('/login', (req, res, next) => {
-    res.render('POST /login');
+  res.send('POST /login');
 });
+
 /* GET /profile */
 router.get('/profile', (req, res, next) => {
-    res.render('GET /profile');
+  res.send('GET /profile');
 });
+
 /* PUT /profile/:user_id */
 router.put('/profile/:user_id', (req, res, next) => {
-    res.render('PUT /profile/:user_id');
+  res.send('PUT /profile/:user_id');
 });
+
 /* GET /forgot */
 router.get('/forgot', (req, res, next) => {
-    res.render('GET /forgot');
+  res.send('GET /forgot');
 });
+
 /* PUT /forgot */
 router.put('/forgot', (req, res, next) => {
-    res.render('PUT /forgot');
+  res.send('PUT /forgot');
 });
-/* GET /reset/:token */
+
+/* GET /reset */
 router.get('/reset/:token', (req, res, next) => {
-    res.render('GET /reset/:token');
+  res.send('GET /reset/:token');
 });
+
 /* PUT /reset */
 router.put('/reset/:token', (req, res, next) => {
-    res.render('PUT /reset/:token');
+  res.send('PUT /reset/:token');
 });
 
 module.exports = router;
