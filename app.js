@@ -8,6 +8,8 @@ const User = require('./models/user');
 const logger = require('morgan');
 const session = require('express-session');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+
 // Require routes
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
@@ -33,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(methodOverride('_method'));
 // Configure Passport and Sessions
 app.use(session({
     secret: 'hang ten dude!',
