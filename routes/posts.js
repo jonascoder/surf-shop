@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const { errorHandler } = require('../middleware');
+const { getPosts } = require('../controllers/posts');
 /* GET index       /posts */
-router.get('/', (req, res, next) => {
-    res.send('INDEX /posts')
-});
+router.get('/', errorHandler(getPosts));
 /* GET new         /posts/new */
 router.get('/new', (req, res, next) => {
     res.send('NEW /posts/new')
