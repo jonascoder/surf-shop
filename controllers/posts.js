@@ -41,6 +41,9 @@ module.exports = {
     },
     // Posts Update
     async postUpdate(req, res, next) {
+        // Handle any deletion of existing images
+        // 
+        // Handle upload of any new images
         let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, { new: true });
         res.redirect(`/posts/${post.id}`);
     },

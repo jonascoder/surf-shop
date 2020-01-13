@@ -1,11 +1,19 @@
 <h1>Edit Post!</h1>
- 
+
 <form action="/posts/<%= post.id %>?_method=PUT" method="POST">
     <div>
         <input type="text" name="post[title]" placeholder="Title" value="<%=  post.title  %>">
     </div>
     <div>
         <input type="text" name="post[price]" placeholder="Price" value="<%=  post.price  %>">
+    </div>
+    <div>
+        <input type="file" accept="images/*" name="images" multiple />
+        <div>
+            <% post.images.forEach(image => { %>
+                <img src="<%= image.url %>" width="100px" />
+                <% }); %>
+        </div>
     </div>
     <div>
         <textarea name="post[description]" placeholder="Description"><%=  post.description  %></textarea>
@@ -17,4 +25,3 @@
         <input type="submit">
     </div>
 </form>
- 
