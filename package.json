@@ -7,6 +7,7 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
+        "cloudinary": "^1.18.1",
         "cookie-parser": "~1.4.4",
         "debug": "~2.6.9",
         "ejs": "~2.6.1",
@@ -16,6 +17,7 @@
         "method-override": "^3.0.0",
         "mongoose": "^5.8.5",
         "morgan": "~1.9.1",
+        "multer": "^1.4.2",
         "passport": "^0.4.1",
         "passport-local": "^1.0.0",
         "passport-local-mongoose": "^6.0.1"
