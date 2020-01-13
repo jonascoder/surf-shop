@@ -8,10 +8,12 @@
         <input type="text" name="post[price]" placeholder="Price" value="<%=  post.price  %>">
     </div>
     <div>
-        <input type="file" accept="images/*" name="images" multiple />
+        <input type="file" id="imageUpload" accept="images/*" name="images" multiple />
         <div>
-            <% post.images.forEach(image => { %>
+            <% post.images.forEach((image,i) => { %>
                 <img src="<%= image.url %>" width="100px" />
+                <label for="image<%= i %>">Delete?</label>
+                <input type="checkbox" name="deleteImage" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
                 <% }); %>
         </div>
     </div>
@@ -25,3 +27,12 @@
         <input type="submit">
     </div>
 </form>
+
+<script>
+// find
+let imageUpload = document.getElementById('imageUpload');
+let imgs = document.querySelectorAll('.imageDeleteCheckbox');
+imgs.length
+imgs = document.querySelectorAll('.imageDeleteCheckbox:checked');
+imgs.length
+</script>
