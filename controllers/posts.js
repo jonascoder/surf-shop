@@ -41,10 +41,47 @@ module.exports = {
     },
     // Posts Update
     async postUpdate(req, res, next) {
-        // Handle any deletion of existing images
-        // 
-        // Handle upload of any new images
-        let post = await Post.findByIdAndUpdate(req.params.id, req.body.post, { new: true });
+        // find the post by id
+        let post = await Post.findById(req.params.id);
+        // check if there's any images fot deleition
+        if (req.body.deleteImages && req.body.deleteImages.length) {
+            // assign deleteImages from req.body to its own variable
+            let deleteImages = req.body.deleteImages;
+            // loop over deoleteImages
+            for (const public_id of deleteImages) {
+                // delete images from cloudinary
+                await cloudinary.v2.uploader.destroy(public_id);
+                // delete images from post.images
+                for (const image of post.images) {
+                    if (image.public_id === public_id) {
+                        let index = post.images.indexOf(image);
+                        post.images.splice(index, 1);
+                    }
+                }
+
+            }
+
+        }
+        // check if there are any new images for upload
+        if (req.files) {
+            // upload images
+            for (const file of req.files) {
+                let image = await cloudinary.v2.uploader.upload(file.path);
+                // add images to post.images array
+                post.images.push({
+                    url: image.secure_url,
+                    public_id: image.public_id
+                });
+            }
+        }
+        // update the post with new any new ptopieties
+        post.title = req.body.post.title
+        post.description = req.body.post.description
+        post.price = req.body.post.price
+        post.location = req.body.post.location
+            // add images to post into the db
+        post.save();
+        // redirect to show page
         res.redirect(`/posts/${post.id}`);
     },
     // Posts Destroy
