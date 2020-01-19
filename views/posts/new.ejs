@@ -1,22 +1,23 @@
-<h1>New Post!</h1>
+<% layout('layouts/boilerplate') -%>
+    <h1>New Post!</h1>
 
-<form action="/posts" method="POST" enctype="multipart/form-data">
-    <div>
-        <input name="post[title]" placeholder="Title" type="text">
-    </div>
-    <div>
-        <input name="post[price]" placeholder="Price" type="text">
-    </div>
-    <div>
-        <input type="file" accept="images/*" name="images" multiple />
-    </div>
-    <div>
-        <textarea name="post[description]" placeholder="Description"></textarea>
-    </div>
-    <div>
-        <input name="post[location]" placeholder="Location" type="text">
-    </div>
-    <div>
-        <input type="submit">
-    </div>
-</form>
+    <form action="/posts" method="POST" enctype="multipart/form-data">
+        <div>
+            <input name="post[title]" placeholder="Title" type="text">
+        </div>
+        <div>
+            <input name="post[price]" placeholder="Price" type="text">
+        </div>
+        <div>
+            <input type="file" accept="images/*" name="images" multiple />
+        </div>
+        <div>
+            <textarea name="post[description]" placeholder="Description"></textarea>
+        </div>
+        <div>
+            <input name="post[location]" placeholder="Location" type="text">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>

@@ -1,47 +1,25 @@
-<h1>Edit Post!</h1>
+<% layout('layouts/boilerplate') -%>
+    <h1>Edit Post!</h1>
 
-<form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
-    <div><input type="text" name="post[title]" placeholder="Title" value="<%= post.title  %>"></div>
-    <div><input type="text" name="post[price]" placeholder="Price" value="<%= post.price  %>"></div>
-    <div>
-        <input type="file" id="imageUpload" accept="images/*" name="images" multiple />
+    <form action="/posts/<%= post.id %>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data">
+        <div><input type="text" name="post[title]" placeholder="Title" value="<%= post.title  %>"></div>
+        <div><input type="text" name="post[price]" placeholder="Price" value="<%= post.price  %>"></div>
         <div>
-            <% post.images.forEach(function(image, i) { %>
-                <img src="<%= image.url %>" width="100px" />
-                <label for="image<%= i %>">Delete?</label>
-                <input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
-                <% }); %>
+            <input type="file" id="imageUpload" accept="images/*" name="images" multiple />
+            <div>
+                <% post.images.forEach(function(image, i) { %>
+                    <img src="<%= image.url %>" width="100px" />
+                    <label for="image<%= i %>">Delete?</label>
+                    <input type="checkbox" name="deleteImages[]" class="imageDeleteCheckbox" id="image<%= i %>" value="<%= image.public_id %>">
+                    <% }); %>
+            </div>
         </div>
-    </div>
-    <div>
-        <textarea name="post[description]" placeholder="Description"><%= post.description  %></textarea>
-    </div>
-    <div><input type="text" name="post[location]" placeholder="Location" value="<%= post.location  %>"></div>
+        <div>
+            <textarea name="post[description]" placeholder="Description"><%= post.description  %></textarea>
+        </div>
+        <div><input type="text" name="post[location]" placeholder="Location" value="<%= post.location  %>"></div>
 
-    <input type="submit">
-</form>
+        <input type="submit">
+    </form>
 
-<script>
-    // find post edit form
-    let postEditForm = document.getElementById('postEditForm');
-    // add submit listener to post edit form
-    postEditForm.addEventListener('submit', function(event) {
-        // find length of uploaded images
-        let imageUploads = document.getElementById('imageUpload').files.length;
-        // find total number of existing images
-        let existingImgs = document.querySelectorAll('.imageDeleteCheckbox').length;
-        // find total number of potential deletions
-        let imgDeletions = document.querySelectorAll('.imageDeleteCheckbox:checked').length;
-        // calculate total after removal of deletions and addition of new uploads
-        let newTotal = existingImgs - imgDeletions + imageUploads;
-        // if newTotal is greater than four
-        if (newTotal > 4) {
-            // prevent form from submitting
-            event.preventDefault();
-            // calculate removal amount
-            let removalAmt = newTotal - 4;
-            // alert user of their error
-            alert(`You need to remove at least ${removalAmt} (more) image${removalAmt === 1 ? '' : 's'}!`);
-        }
-    });
-</script>
+    <script src="/javascripts/post-edit.js"></script>

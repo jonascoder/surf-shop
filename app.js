@@ -1,6 +1,7 @@
 require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
+const engine = require('ejs-mate');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -25,8 +26,9 @@ db.once('open', () => {
     console.log('------------------------------------');
     console.log("we're connected");
     console.log('------------------------------------');
-})
-
+});
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -49,8 +51,12 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-// Mount Routes
+//Set title middleware
+app.use(function(req, res, next) {
+        res.locals.title = 'Surf Shop'
+        next();
+    })
+    // Mount Routes
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.use('/posts/:id/reviews', reviewsRouter);
