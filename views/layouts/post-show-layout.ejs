@@ -14,12 +14,13 @@
 
 <body>
     <% include ../partials/navbar %>
+        <% include ../partials/flash-messages %>
 
-        <%- body -%>
-            <script>
-                var post = <%- JSON.stringify(post) %>;
-            </script>
-            <script src="/javascripts/post-show.js"></script>
+            <%- body -%>
+                <script>
+                    var post = <%- JSON.stringify(post) %>;
+                </script>
+                <script src="/javascripts/post-show.js"></script>
 </body>
 
 </html>

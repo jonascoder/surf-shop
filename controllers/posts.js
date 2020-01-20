@@ -38,9 +38,10 @@ module.exports = {
         let post = await Post.create(req.body.post);
         console.log(post);
         console.log(post.coordinates);
+        req.session.success = 'Post created successfully!';
         res.redirect(`/posts/${post.id}`)
     },
-    // Posts Create
+    // Posts Show
     async postShow(req, res, next) {
         let post = await Post.findById(req.params.id);
         res.render('posts/show', { post });
