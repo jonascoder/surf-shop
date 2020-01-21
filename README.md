@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Post  Edit Form
 - update checkbox name
 - add enctype to Form
@@ -43,3 +44,9 @@ let response = await geocodingClient
 - Update post-route error handling middleware to console.log() the redirect('back)
 - Create a partial for flash messages and include it in our layouts
 - Write some success messages and throw some errors to test it out
+=======
+# surf-shop
+I'm doig this amazing course about Node made by Ian form Udemy
+[Coding width node by Ian Schoonover](https://www.udemy.com/course/code-with-node/)
+[Also check the Ian Web he offer this course for free!!](https://www.devsprout.io/)
+>>>>>>> dea0a85acdb51ed9925371bf38101a4fb5eb5906
