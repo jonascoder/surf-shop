@@ -7,11 +7,12 @@ cloudinary.config({
     api_key: '299518669231946',
     api_secret: process.env.CLOUDINARY_SECRET
 });
+
 module.exports = {
     // Posts Index
     async postIndex(req, res, next) {
         let posts = await Post.find({});
-        res.render('posts/index', { posts, title: 'Post Index' });
+        res.render('posts/index', { posts, title: 'Posts Index' });
     },
     // Posts New
     postNew(req, res, next) {
@@ -34,16 +35,13 @@ module.exports = {
             })
             .send();
         req.body.post.coordinates = response.body.features[0].geometry.coordinates;
-        // use req.body to create a new Post
         let post = await Post.create(req.body.post);
-        console.log(post);
-        console.log(post.coordinates);
         req.session.success = 'Post created successfully!';
-        res.redirect(`/posts/${post.id}`)
+        res.redirect(`/posts/${post.id}`);
     },
     // Posts Show
     async postShow(req, res, next) {
-        let post = await (await Post.findById(req.params.id)).populate({
+        let post = await Post.findById(req.params.id).populate({
             path: 'reviews',
             options: { sort: { '_id': -1 } }
         });
@@ -58,24 +56,22 @@ module.exports = {
     async postUpdate(req, res, next) {
         // find the post by id
         let post = await Post.findById(req.params.id);
-        // check if there's any images fot deleition
+        // check if there's any images for deletion
         if (req.body.deleteImages && req.body.deleteImages.length) {
             // assign deleteImages from req.body to its own variable
             let deleteImages = req.body.deleteImages;
-            // loop over deoleteImages
+            // loop over deleteImages
             for (const public_id of deleteImages) {
                 // delete images from cloudinary
                 await cloudinary.v2.uploader.destroy(public_id);
-                // delete images from post.images
+                // delete image from post.images
                 for (const image of post.images) {
                     if (image.public_id === public_id) {
                         let index = post.images.indexOf(image);
                         post.images.splice(index, 1);
                     }
                 }
-
             }
-
         }
         // check if there are any new images for upload
         if (req.files) {
@@ -89,7 +85,7 @@ module.exports = {
                 });
             }
         }
-        // Check if location was updated
+        // check if location was updated
         if (req.body.post.location !== post.location) {
             let response = await geocodingClient
                 .forwardGeocode({
@@ -99,20 +95,18 @@ module.exports = {
                 .send();
             post.coordinates = response.body.features[0].geometry.coordinates;
             post.location = req.body.post.location;
-
         }
-        // update the post with new any new ptopieties
+        // update the post with any new properties
         post.title = req.body.post.title;
         post.description = req.body.post.description;
         post.price = req.body.post.price;
-        // add images to post into the db
+        // save the updated post into the db
         post.save();
         // redirect to show page
         res.redirect(`/posts/${post.id}`);
     },
     // Posts Destroy
     async postDestroy(req, res, next) {
-
         let post = await Post.findById(req.params.id);
         for (const image of post.images) {
             await cloudinary.v2.uploader.destroy(image.public_id);
