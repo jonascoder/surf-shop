@@ -1,4 +1,5 @@
-mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXNjb2RlciIsImEiOiJjazVreHk2b3MwaHEyM2twY2p0OXBianA1In0.2PyAeRTSn3BVkaY351tVrg';
+require('dotenv').config();
+mapboxgl.accessToken = MAPBOX_TOKEN;
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v10',
