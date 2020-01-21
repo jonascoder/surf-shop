@@ -1,17 +1,12 @@
 <% layout('layouts/boilerplate') -%>
-    <h1>Post Index!</h1>
-    <% posts.forEach(function(post) { %>
-        <h2>
-            <%= post.title %>
-        </h2>
-        <div>Price:
-            <%= post.price %>
-        </div>
-        <div>
-            <%= post.description %>
-        </div>
-        <div>
-            <%= post.location %>
-        </div>
-        <div><a href="/posts/<%=  post.id %>">View more</a></div>
-        <% }); %>
+<h1>Posts Index!</h1>
+
+<% posts.forEach(function(post) { %>
+	<div>
+		<h2><%= post.title %></h2>
+		<div>Price: <%= post.price %></div>
+		<div><%= post.description %></div>
+		<div><%= post.location %></div>
+		<div><a href="/posts/<%= post.id %>">View more</a></div>
+	</div>
+<% }); %>
