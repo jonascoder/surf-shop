@@ -19,7 +19,7 @@ const reviewsRouter = require('./routes/reviews');
 
 const app = express();
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/surf-shop-mapbox', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect('mongodb://localhost:27017/surf-shop', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
