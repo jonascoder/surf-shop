@@ -24,3 +24,7 @@
 .edit-review-form {
     display: none;
 }
+
+.clear-rating {
+    display: block;
+}
