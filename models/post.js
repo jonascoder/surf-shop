@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Review = require('./review');
 const PostSchema = new Schema({
     title: String,
     price: String,
@@ -7,10 +8,10 @@ const PostSchema = new Schema({
     images: [{ url: String, public_id: String }],
     location: String,
     coordinates: Array,
-    author: [{
+    author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }],
+    },
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: 'Review'

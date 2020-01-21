@@ -36,10 +36,13 @@
             <input type="submit">
         </form>
         <h3>Reviews</h3>
+        <!-- display all reviews -->
         <% post.reviews.forEach(function(review) { %>
             <div>
-                <%= review.body %>
-                    Rating:
-                    <%= review.rating %>
+                Author:
+                <%= review.author.username %><br>
+                    <%= review.body %><br> Rating:
+                        <%= review.rating %>
             </div>
+            <hr>
             <% }); %>
