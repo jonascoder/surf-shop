@@ -2,16 +2,16 @@
     <% layout('layouts/post-show-layout') %>
 
         <h1>
-            <%=  post.title %>
+            <%= post.title %>
         </h1>
         <div>
-            <%=  post.price %>
+            <%= post.price %>
         </div>
         <div>
-            <%=  post.description %>
+            <%= post.description %>
         </div>
         <div>
-            <%=  post.location %>
+            <%= post.location %>
         </div>
         <div>
             <% post.images.forEach(function(image){ %>
@@ -29,3 +29,17 @@
                 <input type="submit" value="Delete">
             </form>
         </div>
+        <h2>Create a Review</h2>
+        <form action="/posts/<%=  post.id %>/reviews" method="POST">
+            <textarea name="review[body]"></textarea>
+            <input type="number" name="review[rating]" min=1 max=5 step=1 required>
+            <input type="submit">
+        </form>
+        <h3>Reviews</h3>
+        <% post.reviews.forEach(function(review) { %>
+            <div>
+                <%= review.body %>
+                    Rating:
+                    <%= review.rating %>
+            </div>
+            <% }); %>

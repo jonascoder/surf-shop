@@ -2,16 +2,16 @@
     <h1>Post Index!</h1>
     <% posts.forEach(function(post) { %>
         <h2>
-            <%=  post.title %>
+            <%= post.title %>
         </h2>
         <div>Price:
-            <%=  post.price %>
+            <%= post.price %>
         </div>
         <div>
-            <%=  post.description %>
+            <%= post.description %>
         </div>
         <div>
-            <%=  post.location %>
+            <%= post.location %>
         </div>
         <div><a href="/posts/<%=  post.id %>">View more</a></div>
         <% }); %>
