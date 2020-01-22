@@ -60,6 +60,10 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //Set local variables middleware
+// jonascoder    5e2869431ab79426c400be1b
+// jonascoder3   5e28d85a19c82f09c0c09706
+// jonascoder3   5e28d85a19c82f09c0c09706
+
 app.use(function(req, res, next) {
     req.user = {
         '_id': '5e2869431ab79426c400be1b',

@@ -12,6 +12,9 @@
         <%= post.location %>
     </div>
     <div>
+        <%= post.avgRating %>
+    </div>
+    <div>
         <% post.images.forEach(function(image) { %>
             <img src="<%= image.url %>" alt="Surf board image" width="200px">
             <% }); %>
