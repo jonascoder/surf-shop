@@ -1,32 +1,21 @@
 <% layout('layouts/boilerplate') -%>
     <h1>Posts Index!</h1>
-    <div style="margin: 20px 0;">
-        <% if(posts.page - 1){ %>
-            <a href="/posts?page=<%= posts.page - 1 %>">Prev</a>
-            <% } %>
-                <% for(let i = 1; i <= posts.pages; i++) { %>
-                    <a href="/posts?page=<%= i %>" <%=i===posts.page ? 'style=color:#000;' : '' %>
-                        <%= i %>
-                    </a>
-                    <% } %>
-                        <% if((posts.page + 1) <= posts.pages) { %>
-                            <a href="/posts?page=<%= posts.page + 1 %>">Next</a>
-                            <% } %>
-    </div>
-    <% posts.docs.forEach(function(post) { %>
-        <div>
-            <h2>
-                <%= post.title %>
-            </h2>
-            <div>Price:
-                <%= post.price %>
-            </div>
+    <% include ../partials/paginatePosts %>
+        <% posts.docs.forEach(function(post) { %>
             <div>
-                <%= post.description %>
+                <h2>
+                    <%= post.title %>
+                </h2>
+                <div>Price:
+                    <%= post.price %>
+                </div>
+                <div>
+                    <%= post.description %>
+                </div>
+                <div>
+                    <%= post.location %>
+                </div>
+                <div><a href='/posts/<%= post.id %>'>View more</a></div>
             </div>
-            <div>
-                <%= post.location %>
-            </div>
-            <div><a href="/posts/<%= post.id %>">View more</a></div>
-        </div>
-        <% }); %>
+            <% }); %>
+                <% include ../partials/paginatePosts %>
