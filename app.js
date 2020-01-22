@@ -13,7 +13,8 @@ const User = require('./models/user');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-
+//const seedPosts = require('./seeds');
+//seedPosts();
 // require routes
 const index = require('./routes/index');
 const posts = require('./routes/posts');
@@ -61,7 +62,7 @@ passport.deserializeUser(User.deserializeUser());
 //Set local variables middleware
 app.use(function(req, res, next) {
     req.user = {
-        '_id': '5e26e1d332cd861668abfc32',
+        '_id': '5e2869431ab79426c400be1b',
         'username': 'jonascoder'
     };
     res.locals.currentUser = req.user;

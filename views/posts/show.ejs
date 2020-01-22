@@ -59,10 +59,11 @@
                 <%= review.body %><br> Rating:
                     <%= review.rating %>
         </div>
-        <% if(review.author.equals(currentUser._id)){ %>
+        <% if(review.author.equals(currentUser._id)) { %>
             <div>
                 <button class="toggle-edit-form">Edit</button>
-                <form action="/posts/<%= post.id %>/reviews/<%= review.id %>/?_method=PUT" method="POST" class="edit-review-form">
+
+                <form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=PUT" method="POST" class="edit-review-form">
                     <textarea name="review[body]" required><%= review.body %></textarea>
                     <fieldset class="starability-basic">
                         <legend>Rating:</legend>
@@ -79,15 +80,21 @@
                         <input type="radio" id="edit-rate5" name="review[rating]" value="5" />
                         <label for="edit-rate5" title="Amazing">5 stars</label>
                     </fieldset>
-                    <button type="submit" name="Update">Update</button>
+
+                    <input type="submit" value="Update">
                 </form>
+
                 <script>
                     $('#edit-rate<%= review.rating %>').prop('checked', true);
                 </script>
-                <form action="/posts/<%= post.id %>/reviews/<%= review.id %>/?_method=DELETE" method="POST">
-                    <button type="submit" value="Delete">Delete</button>
+
+                <form action="/posts/<%= post.id %>/reviews/<%= review.id %>?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete">
                 </form>
             </div>
-            <% }; %>
+            <% } %>
                 <hr>
+
+
+
                 <% }); %>
