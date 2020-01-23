@@ -65,10 +65,10 @@ passport.deserializeUser(User.deserializeUser());
 // jonascoder3   5e28d85a19c82f09c0c09706
 
 app.use(function(req, res, next) {
-    req.user = {
-        '_id': '5e28d85a19c82f09c0c09706',
-        'username': 'jonascoder3'
-    };
+    // req.user = {
+    //     '_id': '5e28d85a19c82f09c0c09706',
+    //     'username': 'jonascoder3'
+    // };
     res.locals.currentUser = req.user;
     // set default page title
     res.locals.title = 'Surf Shop';
