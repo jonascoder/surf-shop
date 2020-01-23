@@ -20,7 +20,7 @@ const PostSchema = new Schema({
             required: true
         }
     },
-    propieties: {
+    properties: {
         description: String
     },
     author: {
@@ -34,7 +34,7 @@ const PostSchema = new Schema({
     avgRating: { type: Number, default: 0 }
 });
 PostSchema.pre('remove', async function() {
-    await Review.remove({
+    await Review.deleteOne({
         _id: {
             $in: this.reviews
         }
