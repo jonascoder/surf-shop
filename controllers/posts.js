@@ -55,8 +55,8 @@ module.exports = {
             }
         });
         const floorRating = post.calculateAvgRating();
-        let mapBoxToken = process.env.MAPBOX_TOKEN;
-        res.render('posts/show', { post, mapBoxToken, floorRating });
+        //let mapBoxToken = process.env.MAPBOX_TOKEN;
+        res.render('posts/show', { post, floorRating });
     },
     // Posts Edit
     async postEdit(req, res, next) {
