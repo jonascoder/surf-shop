@@ -24,8 +24,6 @@ module.exports = {
             });
         } catch (err) {
             const { username, email } = req.body;
-            console.log(username, email);
-            console.log(err);
             let error = err.message;
             if (error.includes('duplicate') && error.includes('index: email_1 dup key')) {
                 error = 'A user with the given email is already registered';
@@ -35,6 +33,7 @@ module.exports = {
     },
     // GET /login
     getLogin(req, res, next) {
+        if (req.isAuthenticated()) return res.redirect('/');
         res.render('login', { title: 'Login' });
     },
     // POST /login
