@@ -39,7 +39,7 @@ app.set('view engine', 'ejs');
 // set public assets directory
 app.use(express.static('public'));
 
-// uncomment after placing your favicon in /public
+
 app.use(favicon(path.join(__dirname, 'public', '/images/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
