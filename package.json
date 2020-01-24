@@ -8,17 +8,17 @@
     "dependencies": {
         "@mapbox/mapbox-sdk": "^0.9.0",
         "body-parser": "^1.19.0",
-        "cloudinary": "^1.18.1",
+        "cloudinary": "^1.19.0",
         "cookie-parser": "~1.4.4",
-        "debug": "~2.6.9",
-        "ejs": "~2.6.1",
+        "debug": "~4.1.1",
+        "ejs": "~3.0.1",
         "ejs-mate": "^3.0.0",
         "express": "^4.17.1",
         "express-session": "^1.17.0",
         "faker": "^4.1.0",
-        "http-errors": "^1.6.3",
+        "http-errors": "^1.7.3",
         "method-override": "^3.0.0",
-        "mongoose": "^5.8.5",
+        "mongoose": "^5.8.9",
         "mongoose-paginate": "^5.0.3",
         "morgan": "~1.9.1",
         "multer": "^1.4.2",
@@ -29,8 +29,8 @@
         "serve-favicon": "^2.5.0"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.15.0",
-        "@typescript-eslint/parser": "^2.15.0",
+        "@typescript-eslint/eslint-plugin": "^2.17.0",
+        "@typescript-eslint/parser": "^2.17.0",
         "dotenv": "^8.2.0",
         "eslint": "^6.8.0",
         "locus": "^2.0.4"

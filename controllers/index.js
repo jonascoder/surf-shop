@@ -18,7 +18,7 @@ module.exports = {
         try {
             const user = await User.register(new User(req.body), req.body.password);
             req.login(user, function(err) {
-                if (err) { return next(err); }
+                if (err) return next(err);
                 req.session.success = `Welcome to Surf Shop, ${user.username}!`;
                 res.redirect('/');
             });
@@ -28,21 +28,20 @@ module.exports = {
             if (error.includes('duplicate') && error.includes('index: email_1 dup key')) {
                 error = 'A user with the given email is already registered';
             }
-            res.render('register', { title: 'Register', username, email, error })
+            res.render('register', { title: 'Register', username, email, error });
         }
     },
     // GET /login
     getLogin(req, res, next) {
         if (req.isAuthenticated()) return res.redirect('/');
+        if (req.query.returnTo) req.session.redirectTo = req.headers.referer;
         res.render('login', { title: 'Login' });
     },
     // POST /login
     async postLogin(req, res, next) {
         const { username, password } = req.body;
         const { user, error } = await User.authenticate()(username, password);
-        if (!user && error) {
-            return next(error);
-        }
+        if (!user && error) return next(error);
         req.login(user, function(err) {
             if (err) return next(err);
             req.session.success = `Welcome back, ${username}!`;
