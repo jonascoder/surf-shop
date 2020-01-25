@@ -1,8 +1,8 @@
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v9',
-    center: [-98.55562, 39.809734],
-    zoom: 3.3
+    center: [1.679511, 41.836828], //[-98.55562, 39.809734],
+    zoom: 6.3
 });
 
 map.addControl(new MapboxGeocoder({
@@ -32,8 +32,7 @@ map.on('load', function() {
             //   * Yellow, 30px circles when point count is between 100 and 750
             //   * Pink, 40px circles when point count is greater than or equal to 750
             "circle-color": [
-                "step",
-                ["get", "point_count"],
+                "step", ["get", "point_count"],
                 "#51bbd6",
                 100,
                 "#f1f075",
@@ -41,8 +40,7 @@ map.on('load', function() {
                 "#f28cb1"
             ],
             "circle-radius": [
-                "step",
-                ["get", "point_count"],
+                "step", ["get", "point_count"],
                 20,
                 100,
                 30,
@@ -78,27 +76,27 @@ map.on('load', function() {
     });
 
     map.on('click', 'unclustered-point', function(e) {
-      var coordinates = e.features[0].geometry.coordinates.slice();
-      var description = e.features[0].properties.description;
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
 
-      new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(description)
-        .addTo(map);
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
     });
 
     // inspect a cluster on click
     map.on('click', 'clusters', function(e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
         var clusterId = features[0].properties.cluster_id;
-        map.getSource('posts').getClusterExpansionZoom(clusterId, function (err, zoom) {
+        map.getSource('posts').getClusterExpansionZoom(clusterId, function(err, zoom) {
             if (err)
                 return;
 
@@ -119,4 +117,9 @@ map.on('load', function() {
     map.on('mouseleave', 'clusters', mouseLeaveCursor);
     map.on('mouseenter', 'unclustered-point', mouseenterCursor);
     map.on('mouseleave', 'unclustered-point', mouseLeaveCursor);
+
 });
+// Dizable zoom from mouse scrollwheel
+map.scrollZoom.disable();
+// Add zom an rotation controls to the map
+map.addControl(new mapboxgl.NavigationControl());
