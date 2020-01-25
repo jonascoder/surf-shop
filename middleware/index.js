@@ -46,30 +46,24 @@ module.exports = {
         }
     },
     changePassword: async(req, res, next) => {
-        // destructure new password values from req.body object
         const {
             newPassword,
             passwordConfirmation
         } = req.body;
 
-        // check if new password values exist
-        if (newPassword && passwordConfirmation) {
-            // destructure user from res.locals
+        if (newPassword && !passwordConfirmation) {
+            req.session.error = 'Missing password confirmation!';
+            return res.redirect('/profile');
+        } else if (newPassword && passwordConfirmation) {
             const { user } = res.locals;
-            // check if new passwords match
             if (newPassword === passwordConfirmation) {
-                // set new password on user object
                 await user.setPassword(newPassword);
-                // go to next middleware
                 next();
             } else {
-                // flash error
                 req.session.error = 'New passwords must match!';
-                // short circuit the route middleware and redirect to /profile
                 return res.redirect('/profile');
             }
         } else {
-            // go to next middleware
             next();
         }
     }
